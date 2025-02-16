@@ -1,0 +1,29 @@
+services:
+  tcp:
+    restart: always
+    image: python:latest
+    command: sh -c 'cd /service ; python3 service.py ${TCP_PORT} ${SERVER_KEY}'
+    volumes:
+      - "./tcpservice:/service"
+    ports:
+      - ${TCP_PORT}:${TCP_PORT}
+  websocket:
+    restart: always
+    depends_on:
+      - tcp
+    image: python:latest
+    command: sh -c 'cd /service ; pip install -r requirements.txt && python3 service.py tcp ${TCP_PORT} ${WEBSOCKET_PORT}'
+    volumes:
+      - "./websocketservice:/service"
+    ports:
+      - ${WEBSOCKET_PORT}:${WEBSOCKET_PORT}
+  web:
+    restart: always
+    depends_on:
+      - websocket
+    image: python:latest
+    command: sh -c 'cd /service ; pip install -r requirements.txt && python3 app.py ${WEB_PORT} ${WEBSOCKET_PORT}'
+    volumes:
+      - "./webservice:/service"
+    ports:
+      - ${WEB_PORT}:${WEB_PORT}

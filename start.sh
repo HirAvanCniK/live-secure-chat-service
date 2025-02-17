@@ -5,4 +5,4 @@ export TCP_PORT=5000
 export WEB_PORT=3000
 export SERVER_KEY=
 
-docker-compose up &> /dev/null &
+docker compose up &> /dev/null &

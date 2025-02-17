@@ -6,11 +6,11 @@
     <title>Live Chat</title>
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="../static/imgs/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <main>
-
-        <button id="connect-button" class="btn" onclick="connect(this, {{ socket_port }})">Connect</button>
+        <button id="connect-button" class="btn" onclick="connect(this, '{{ socket_port }}')">Connect</button>
         <div class="chat-container" style="display:none;">
             <div id="chat-box"></div>
             <div class="input-container">
